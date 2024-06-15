@@ -1,13 +1,7 @@
-import { getIngredientsApi } from '@api';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TIngredient } from '@utils-types';
-
-enum RequestStatus {
-  Idle = 'Idle',
-  Loading = 'Loading',
-  Success = 'Success',
-  Failed = 'Failed'
-}
+import { RequestStatus } from '@utils-types';
+import { getIngredients } from '../thunk/ingredients';
+import { createSlice } from '@reduxjs/toolkit';
 
 export type TIngredientState = {
   data: TIngredient[];
@@ -18,11 +12,6 @@ const initialState: TIngredientState = {
   data: [],
   status: RequestStatus.Idle
 };
-
-export const getIngredients = createAsyncThunk<TIngredient[]>(
-  'ingredients/getIngredients',
-  getIngredientsApi
-);
 
 export const ingredientsSlice = createSlice({
   name: 'ingredients',
