@@ -45,7 +45,7 @@ export const userSlice = createSlice({
   },
   selectors: {
     getUser: (state: TUserState) => state.data,
-    getIsAuthChecked: (state: TUserState) => state.isAuthChecked
+    getAuthChecked: (state: TUserState) => state.isAuthChecked
   }
 });
 

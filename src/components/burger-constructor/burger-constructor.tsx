@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const dispatch = useDispatch();
-  const checkUserAuth = useSelector(userSelectors.getUser);
+  const checkUserAuth = useSelector(userSelectors.getAuthChecked);
   const navigate = useNavigate();
 
   const constructorItems = {
