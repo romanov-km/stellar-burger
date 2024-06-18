@@ -8,6 +8,8 @@ import {
   registerUserApi
 } from '@api';
 import { userActions } from '../slices/user';
+import { setCookie } from '../../utils/cookie';
+import { deleteCookie } from '../../utils/cookie';
 
 export const registerUser = createAsyncThunk<
   TUser,
@@ -22,7 +24,9 @@ export const loginUser = createAsyncThunk<
   { email: string; password: string }
 >('user/login', async (user) => {
   const res = await loginUserApi(user);
-  localStorage.setItem('accessToken', res.accessToken);
+  //localStorage.setItem('accessToken', res.accessToken);
+  //localStorage.setItem('refreshToken', res.refreshToken);
+  setCookie('accessToken', res.accessToken);
   localStorage.setItem('refreshToken', res.refreshToken);
   return res.user;
 });
@@ -48,6 +52,7 @@ export const checkUserAuth = createAsyncThunk(
 
 export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
   await logoutApi();
-  localStorage.removeItem('accessToken');
+  //localStorage.removeItem('accessToken');
   localStorage.removeItem('refreshToken');
+  deleteCookie('accessToken');
 });

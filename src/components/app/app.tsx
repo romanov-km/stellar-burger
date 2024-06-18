@@ -23,8 +23,8 @@ import { ProtectedRoute } from '../protected-route/protected-route';
 
 const App = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
   const backgroundLocation = location.state?.background;
 
   const close = () => {
@@ -38,7 +38,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes location={location || backgroundLocation}>
+      <Routes location={backgroundLocation || location}>
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='*' element={<NotFound404 />} />
