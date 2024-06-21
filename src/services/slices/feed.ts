@@ -26,6 +26,7 @@ const feedSlice = createSlice({
         state.orders = action.payload.orders;
         state.total = action.payload.total;
         state.totalToday = action.payload.totalToday;
+        state.status = RequestStatus.Success;
       })
       .addCase(getFeeds.rejected, (state) => {
         state.status = RequestStatus.Failed;

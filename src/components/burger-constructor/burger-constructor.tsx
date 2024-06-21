@@ -19,7 +19,7 @@ export const BurgerConstructor: FC = () => {
     useSelector((state) => state.burgerConstructor.status) ===
     RequestStatus.Loading;
 
-  const orderModalData = null;
+  const orderModalData = useSelector((state) => state.burgerConstructor.order);
 
   const onOrderClick = () => {
     if (!checkUserAuth) {
@@ -35,8 +35,8 @@ export const BurgerConstructor: FC = () => {
   };
 
   const closeOrderModal = () => {
-    dispatch(burgerConstructorActions.clear());
     navigate('/');
+    dispatch(burgerConstructorActions.clear());
   };
 
   const price = useMemo(
@@ -48,8 +48,6 @@ export const BurgerConstructor: FC = () => {
       ),
     [constructorItems]
   );
-
-  //return null;
 
   return (
     <BurgerConstructorUI

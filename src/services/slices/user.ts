@@ -31,16 +31,15 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.data = action.payload;
-      state.isAuthChecked = true;
       state.RequestStatus = RequestStatus.Success;
     });
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.data = action.payload;
-      state.isAuthChecked = true;
       state.RequestStatus = RequestStatus.Success;
     });
-    builder.addCase(logoutUser.fulfilled, (state, action) => {
+    builder.addCase(logoutUser.fulfilled, (state) => {
       state.data = null;
+      state.isAuthChecked = false;
     });
   },
   selectors: {

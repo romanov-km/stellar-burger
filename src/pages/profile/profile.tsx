@@ -1,6 +1,7 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
+import { updateUser } from '../../services/thunk/user';
 
 export const Profile: FC = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ export const Profile: FC = () => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     // Ваш код отправки данных
+    dispatch(updateUser(formValue));
   };
 
   const handleCancel = (e: SyntheticEvent) => {

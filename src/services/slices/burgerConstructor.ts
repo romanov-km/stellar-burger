@@ -48,6 +48,8 @@ export const burgerConstructorSlice = createSlice({
     clear: (state) => {
       state.ingredients = [];
       state.bun = null;
+      state.status = RequestStatus.Idle;
+      state.order = null;
     }
   },
   extraReducers: (builder) => {

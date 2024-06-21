@@ -2,10 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import {
   TLoginData,
+  TRegisterData,
   getUserApi,
   loginUserApi,
   logoutApi,
-  registerUserApi
+  registerUserApi,
+  updateUserApi
 } from '@api';
 import { userActions } from '../slices/user';
 import { setCookie } from '../../utils/cookie';
@@ -38,7 +40,8 @@ export const checkUserAuth = createAsyncThunk(
       getUserApi()
         .then((res) => dispatch(userActions.setUser(res.user)))
         .catch(() => {
-          localStorage.removeItem('accessToken');
+          //localStorage.removeItem('accessToken');
+          deleteCookie('accessToken');
           localStorage.removeItem('refreshToken');
         })
         .finally(() => {
@@ -56,3 +59,11 @@ export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
   localStorage.removeItem('refreshToken');
   deleteCookie('accessToken');
 });
+
+export const updateUser = createAsyncThunk(
+  'user/update',
+  async ({ name, email, password }: TRegisterData) => {
+    const data = await updateUserApi({ name, email, password });
+    return data.user;
+  }
+);

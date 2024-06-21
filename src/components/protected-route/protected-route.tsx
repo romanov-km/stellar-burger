@@ -3,7 +3,6 @@ import { Navigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import { Preloader } from '../ui/preloader';
 import { userSelectors } from '../../services/slices/user';
-import { Children } from 'react';
 
 type ProtectedRouteProps = {
   onlyUnAuth?: boolean;
