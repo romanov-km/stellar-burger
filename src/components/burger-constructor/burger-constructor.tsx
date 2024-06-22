@@ -11,7 +11,7 @@ import { orderBurger } from '../../services/slices/burgerConstructor';
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
   const dispatch = useDispatch();
-  const checkUserAuth = useSelector(userSelectors.getAuthChecked);
+  const user = useSelector(userSelectors.getUser);
   const constructorItems = useSelector((state) => state.burgerConstructor);
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export const BurgerConstructor: FC = () => {
   const orderModalData = useSelector((state) => state.burgerConstructor.order);
 
   const onOrderClick = () => {
-    if (!checkUserAuth) {
+    if (!user) {
       navigate('/login');
     }
     if (!constructorItems.bun || orderRequest) return;
