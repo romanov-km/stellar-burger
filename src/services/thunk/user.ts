@@ -10,7 +10,7 @@ import {
   updateUserApi
 } from '@api';
 import { userActions } from '../slices/user';
-import { setCookie } from '../../utils/cookie';
+import { getCookie, setCookie } from '../../utils/cookie';
 import { deleteCookie } from '../../utils/cookie';
 
 export const registerUser = createAsyncThunk<
@@ -26,8 +26,6 @@ export const loginUser = createAsyncThunk<
   { email: string; password: string }
 >('user/login', async (user) => {
   const res = await loginUserApi(user);
-  //localStorage.setItem('accessToken', res.accessToken);
-  //localStorage.setItem('refreshToken', res.refreshToken);
   setCookie('accessToken', res.accessToken);
   localStorage.setItem('refreshToken', res.refreshToken);
   return res.user;
@@ -36,11 +34,10 @@ export const loginUser = createAsyncThunk<
 export const checkUserAuth = createAsyncThunk(
   'user/checkUserAuth',
   async (_, { dispatch }) => {
-    if (localStorage.getItem('accessToken')) {
+    if (getCookie('accessToken')) {
       getUserApi()
         .then((res) => dispatch(userActions.setUser(res.user)))
         .catch(() => {
-          //localStorage.removeItem('accessToken');
           deleteCookie('accessToken');
           localStorage.removeItem('refreshToken');
         })
@@ -55,7 +52,6 @@ export const checkUserAuth = createAsyncThunk(
 
 export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
   await logoutApi();
-  //localStorage.removeItem('accessToken');
   localStorage.removeItem('refreshToken');
   deleteCookie('accessToken');
 });
