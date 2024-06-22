@@ -1,4 +1,9 @@
-import { TConstructorIngredient, RequestStatus, TOrder } from '@utils-types';
+import {
+  TConstructorIngredient,
+  RequestStatus,
+  TOrder,
+  TIngredient
+} from '@utils-types';
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -32,13 +37,17 @@ export const burgerConstructorSlice = createSlice({
   name: 'burgerConstructorSlice',
   initialState,
   reducers: {
-    add: (state, action) => {
-      const ingredient = { ...action.payload, id: crypto.randomUUID() };
-      if (ingredient.type === 'bun') {
-        state.bun = ingredient;
-      } else {
-        state.ingredients.push(ingredient);
-      }
+    add: {
+      reducer: (state, { payload }: PayloadAction<TConstructorIngredient>) => {
+        if (payload.type === 'bun') {
+          state.bun = payload;
+        } else {
+          state.ingredients.push(payload);
+        }
+      },
+      prepare: (ingredient: TIngredient) => ({
+        payload: { ...ingredient, id: crypto.randomUUID() }
+      })
     },
     delete: (state, action) => {
       state.ingredients = state.ingredients.filter(
