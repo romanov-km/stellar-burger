@@ -49,9 +49,9 @@ export const burgerConstructorSlice = createSlice({
         payload: { ...ingredient, id: crypto.randomUUID() }
       })
     },
-    delete: (state, action) => {
+    delete: (state, { payload }: PayloadAction<number>) => {
       state.ingredients = state.ingredients.filter(
-        (item) => item._id !== action.payload
+        (_, index) => index !== payload
       );
     },
     clear: (state) => {
