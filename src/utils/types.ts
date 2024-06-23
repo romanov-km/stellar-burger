@@ -38,3 +38,10 @@ export type TUser = {
 };
 
 export type TTabMode = 'bun' | 'sauce' | 'main';
+
+export enum RequestStatus {
+  Idle = 'Idle', // нет загрузки
+  Loading = 'Loading', // загрузка
+  Success = 'Success', // успешно
+  Failed = 'Failed' // ошибка
+}
