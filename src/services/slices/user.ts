@@ -8,7 +8,7 @@ export type TUserState = {
   RequestStatus: RequestStatus;
 };
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   isAuthChecked: false,
   data: null,
   RequestStatus: RequestStatus.Idle
