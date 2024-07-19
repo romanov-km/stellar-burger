@@ -3,7 +3,7 @@ import { getFeeds } from '../thunk/feed';
 import { initialState, feedReducer } from '../slices/feed';
 import { TOrdersData, RequestStatus } from '@utils-types';
 
-describe('тест ленты заказов', () => {
+describe('тест ленты заказов feedReducer', () => {
   const mockOrders: TOrdersData = {
     totalToday: 10,
     total: 14,
@@ -37,7 +37,7 @@ describe('тест ленты заказов', () => {
       }
     ]
   };
-  test('тестируем экшены', () => {
+  test('тестируем экшен fulfilled', () => {
     const action = {
       payload: mockOrders,
       type: getFeeds.fulfilled.type
@@ -52,7 +52,7 @@ describe('тест ленты заказов', () => {
     const newState = feedReducer(initialState, action);
     expect(newState).toEqual(expectState);
   });
-  test('тестируем экшены 2', () => {
+  test('тестируем экшен rejected', () => {
     const action = {
       type: getFeeds.rejected.type
     };
@@ -66,7 +66,7 @@ describe('тест ленты заказов', () => {
     const newState = feedReducer(initialState, action);
     expect(newState).toEqual(expectState);
   });
-  test('тестируем экшены 3', () => {
+  test('тестируем экшен pending', () => {
     const action = {
       type: getFeeds.pending.type
     };

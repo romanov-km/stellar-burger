@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TUser, RequestStatus } from '@utils-types';
-import { loginUser, logoutUser, registerUser } from '../thunk/user';
+import { loginUser, logoutUser, registerUser, updateUser } from '../thunk/user';
 
 export type TUserState = {
   isAuthChecked: boolean;
@@ -29,17 +29,49 @@ export const userSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
+    //login
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.data = action.payload;
       state.RequestStatus = RequestStatus.Success;
     });
+    builder.addCase(loginUser.pending, (state) => {
+      state.RequestStatus = RequestStatus.Loading;
+    });
+    builder.addCase(loginUser.rejected, (state) => {
+      state.RequestStatus = RequestStatus.Failed;
+    });
+    //register
     builder.addCase(registerUser.fulfilled, (state, action) => {
       state.data = action.payload;
       state.RequestStatus = RequestStatus.Success;
     });
+    builder.addCase(registerUser.pending, (state) => {
+      state.RequestStatus = RequestStatus.Loading;
+    });
+    builder.addCase(registerUser.rejected, (state) => {
+      state.RequestStatus = RequestStatus.Failed;
+    });
+    //logout
     builder.addCase(logoutUser.fulfilled, (state) => {
       state.data = null;
       state.isAuthChecked = false;
+    });
+    builder.addCase(logoutUser.pending, (state) => {
+      state.RequestStatus = RequestStatus.Loading;
+    });
+    builder.addCase(logoutUser.rejected, (state) => {
+      state.RequestStatus = RequestStatus.Failed;
+    });
+    //update
+    builder.addCase(updateUser.pending, (state) => {
+      state.RequestStatus = RequestStatus.Loading;
+    });
+    builder.addCase(updateUser.fulfilled, (state, action) => {
+      state.data = action.payload;
+      state.RequestStatus = RequestStatus.Success;
+    });
+    builder.addCase(updateUser.rejected, (state) => {
+      state.RequestStatus = RequestStatus.Failed;
     });
   },
   selectors: {

@@ -24,7 +24,7 @@ describe('тесты rootReducer', () => {
     expect(newState).toEqual(initialRootState);
   });
   test('проверка инициализации начального состояния', () => {
-    const action = { type: 'FAKE_ACTION' };
+    const action = { type: 'UNKNOWN_ACTION' };
     const newState = rootReducer(initialRootState, action);
     expect(newState).toEqual(initialRootState);
   });
