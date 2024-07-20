@@ -16,7 +16,7 @@ export type TBurgerConstructorState = {
   order: TOrder | null;
 };
 
-const initialState: TBurgerConstructorState = {
+export const initialState: TBurgerConstructorState = {
   bun: null,
   ingredients: [],
   status: RequestStatus.Idle,

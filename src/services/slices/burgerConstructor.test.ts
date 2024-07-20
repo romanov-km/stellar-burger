@@ -2,19 +2,12 @@ import { describe, expect, test } from '@jest/globals';
 import {
   burgerConstructorReducer,
   burgerConstructorActions,
-  TBurgerConstructorState,
-  orderBurger
+  orderBurger,
+  initialState
 } from '../slices/burgerConstructor';
 import { TConstructorIngredient, RequestStatus, TOrder } from '@utils-types';
 
 describe('burgerConstructor reducer', () => {
-  const initialState: TBurgerConstructorState = {
-    ingredients: [],
-    bun: null,
-    status: RequestStatus.Idle,
-    order: null
-  };
-
   const mockOrder: TOrder = {
     _id: '66995433119d45001b4f9dd5',
     ingredients: [
