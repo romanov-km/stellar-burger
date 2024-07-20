@@ -1,0 +1,8 @@
+{
+    "success": true,
+    "user": {
+        "id":5,
+            "name": "Kirill",
+            "email": "kirill@gmail.com"
+        }
+   }
